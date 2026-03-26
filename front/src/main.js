@@ -21,6 +21,7 @@ import { initAirportScene, destroyScene } from './scene/airport.js';
 
 // Pages
 import { initAlertCenter } from './pages/alertCenter.js';
+import { initTerminalAnalytics } from './pages/terminalAnalytics.js';
 
 // Router
 import { registerRoute, initRouter } from './router.js';
@@ -42,6 +43,7 @@ function init() {
   // Register routes
   registerRoute('dashboard', showDashboard);
   registerRoute('alerts', showAlerts);
+  registerRoute('terminal-kpis', showTerminalKpis);
 
   // Initialize router (triggers initial route)
   initRouter();
@@ -102,6 +104,26 @@ function showAlerts() {
 
   // Render alert center
   initAlertCenter(viewport);
+}
+
+// ============================================
+// Terminal Analytics View
+// ============================================
+function showTerminalKpis() {
+  const viewport = $('#viewport');
+  const rightPanel = $('#right-panel');
+  const timeline = $('#timeline');
+
+  // Destroy 3D scene
+  destroyScene();
+  sceneInitialized = false;
+
+  // Hide right panel and timeline for full-page view
+  rightPanel.classList.add('hidden');
+  timeline.classList.add('hidden');
+
+  // Render terminal analytics
+  initTerminalAnalytics(viewport);
 }
 
 // ============================================
