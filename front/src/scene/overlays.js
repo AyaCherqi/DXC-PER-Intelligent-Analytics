@@ -17,24 +17,40 @@ let rendererRef = null;
 // Heatmap zones — positions must match buildings.js exactly
 const heatmapZones = [
     // === EAST PRECINCT ===
-    { id: 't1-international', position: [50, 0.5, -18], size: [22, 15], intensity: 0.65, color: 0xfbbf24, label: 'T1 International' },
-    { id: 't1-pier',          position: [34, 0.5, -18], size: [24, 6],  intensity: 0.55, color: 0xfbbf24, label: 'T1 Gates 50-56' },
-    { id: 't2-regional',      position: [44, 0.5, 14],  size: [12, 8],  intensity: 0.45, color: 0x4ade80, label: 'T2 Regional' },
-    { id: 'security-east',    position: [50, 0.5, -8],  size: [8, 4],   intensity: 0.90, color: 0xef4444, label: 'Security East' },
-    { id: 'airport-central',  position: [56, 0.5, -36], size: [10, 8],  intensity: 0.50, color: 0x38bdf8, label: 'Airport Central Station' },
+    // T1 Intl at [50, 0, -30], size [18,7,12]
+    { id: 't1-international', position: [50,  0.5, -30], size: [20, 14], intensity: 0.65, color: 0xfbbf24, label: 'T1 International' },
+    // T1 Domestic at [44, 0, -16], size [14,6,10]
+    { id: 't1-domestic',      position: [44,  0.5, -16], size: [16, 12], intensity: 0.55, color: 0x38bdf8, label: 'T1 Domestic' },
+    // T1 pier extends east from [-44, -22] → x range [38→18]
+    { id: 't1-pier',          position: [28,  0.5, -22], size: [22,  5], intensity: 0.50, color: 0xfbbf24, label: 'T1 Gates 50-56' },
+    // T2 at [44, 0, 12]
+    { id: 't2-regional',      position: [44,  0.5,  12], size: [12,  8], intensity: 0.45, color: 0x4ade80, label: 'T2 Regional' },
+    // Security East at [52, 0, -10]
+    { id: 'security-east',    position: [52,  0.5, -10], size: [8,   4], intensity: 0.90, color: 0xef4444, label: 'Security East' },
+    // Airport Central at [64, 0, -14]
+    { id: 'airport-central',  position: [64,  0.5, -14], size: [10,  8], intensity: 0.50, color: 0x38bdf8, label: 'Airport Central Station' },
 
     // === WEST PRECINCT ===
-    { id: 't4-qantas',        position: [-44, 0.5, -22], size: [14, 10], intensity: 0.55, color: 0xfbbf24, label: 'T4 Qantas' },
-    { id: 't3-qantas',        position: [-44, 0.5, -1],  size: [16, 12], intensity: 0.60, color: 0xfbbf24, label: 'T3 Qantas' },
-    { id: 'security-west',    position: [-44, 0.5, -16], size: [8, 4],   intensity: 0.80, color: 0xef4444, label: 'Security West' },
+    // T4 at [-50, 0, -22], size [12,5,9]
+    { id: 't4-qantas',        position: [-50, 0.5, -22], size: [14, 10], intensity: 0.55, color: 0xfbbf24, label: 'T4 Qantas' },
+    // T3 at [-50, 0, -7], size [14,5.5,11]
+    { id: 't3-qantas',        position: [-50, 0.5,  -7], size: [16, 12], intensity: 0.60, color: 0xfbbf24, label: 'T3 Qantas' },
+    // T4 pier: x-pos from [-44,-22], length 16 → center at [-36,-22]
+    { id: 't4-pier',          position: [-36, 0.5, -22], size: [18,  5], intensity: 0.50, color: 0xfbbf24, label: 'T4 Gates 7-15' },
+    // T3 north pier: x-pos from [-43,-10], length 12 → center at [-37,-10]
+    { id: 't3-pier-north',    position: [-37, 0.5, -10], size: [13,  4], intensity: 0.45, color: 0xfbbf24, label: 'T3 Gates 16-17C' },
+    // T3 south pier: x-pos from [-43,-3], length 20 → center at [-33,-3]
+    { id: 't3-pier-south',    position: [-33, 0.5,  -3], size: [21,  5], intensity: 0.55, color: 0xfbbf24, label: 'T3 Gates 18-35' },
+    // Security West at [-50, 0, -18]
+    { id: 'security-west',    position: [-50, 0.5, -18], size: [ 8,  4], intensity: 0.80, color: 0xef4444, label: 'Security West' },
 
     // === TRANSPORT ===
-    { id: 'transport-east',   position: [60, 0.5, -8],  size: [8, 5],   intensity: 0.45, color: 0x38bdf8, label: 'Transport Hub East' },
-    { id: 'transport-west',   position: [-34, 0.5, -8], size: [8, 5],   intensity: 0.40, color: 0x38bdf8, label: 'Transport Hub West' },
+    { id: 'transport-east',   position: [66,  0.5,  -6], size: [ 8,  5], intensity: 0.45, color: 0x38bdf8, label: 'Transport Hub East' },
+    { id: 'transport-west',   position: [-37, 0.5,  -4], size: [ 8,  5], intensity: 0.40, color: 0x38bdf8, label: 'Transport Hub West' },
 
     // === SUPPORT ===
-    { id: 'cargo-area',       position: [14, 0.5, 40],  size: [16, 9],  intensity: 0.35, color: 0xa78bfa, label: 'Cargo & Freight' },
-    { id: 'fifo-terminal',    position: [-50, 0.5, 26], size: [11, 7],  intensity: 0.45, color: 0xfbbf24, label: 'FIFO Charter Terminal' },
+    { id: 'cargo-area',       position: [14,  0.5,  40], size: [16,  9], intensity: 0.35, color: 0xa78bfa, label: 'Cargo & Freight' },
+    { id: 'fifo-terminal',    position: [-50, 0.5,  26], size: [11,  7], intensity: 0.45, color: 0xfbbf24, label: 'FIFO Charter Terminal' },
 ];
 
 export function createOverlays(scene, zoneObjects) {
@@ -104,34 +120,36 @@ function createLabelOverlay() {
     viewport.appendChild(labelContainer);
 
     const labelDefs = [
-        // Terminals
-        { name: 'T1 International',         pos: new THREE.Vector3(50, 10, -18),  type: 'terminal' },
-        { name: 'T1 Gates 50-56',            pos: new THREE.Vector3(34,  6, -18),  type: 'pier' },
-        { name: 'T2 Regional',               pos: new THREE.Vector3(44,  8,  14),  type: 'terminal' },
-        { name: 'T3 Qantas',                 pos: new THREE.Vector3(-44,  9,  -1), type: 'terminal' },
-        { name: 'T4 Qantas',                 pos: new THREE.Vector3(-44,  8, -22), type: 'terminal' },
-        // Gates
-        { name: 'T3 Gates 16-17C',           pos: new THREE.Vector3(-44,  6, -14), type: 'pier' },
-        { name: 'T3 Gates 18-35',            pos: new THREE.Vector3(-44,  6,  14), type: 'pier' },
-        { name: 'T4 Gates 7-15',             pos: new THREE.Vector3(-28,  6, -34), type: 'pier' },
+        // Terminals — East Precinct
+        { name: 'T1 International',         pos: new THREE.Vector3(50, 10, -30),  type: 'terminal' },
+        { name: 'T1 Domestic (Virgin)',      pos: new THREE.Vector3(44,  9, -16),  type: 'terminal' },
+        { name: 'T1 Gates 50-56',            pos: new THREE.Vector3(28,  6, -22),  type: 'pier' },
+        { name: 'T2 Regional',               pos: new THREE.Vector3(44,  8,  12),  type: 'terminal' },
+        // Terminals — West Precinct
+        { name: 'T4 Qantas',                 pos: new THREE.Vector3(-50,  8, -22), type: 'terminal' },
+        { name: 'T3 Qantas',                 pos: new THREE.Vector3(-50,  9,  -7), type: 'terminal' },
+        // Gates — West Precinct (piers extend east now)
+        { name: 'T4 Gates 7-15',             pos: new THREE.Vector3(-36,  6, -22), type: 'pier' },
+        { name: 'T3 Gates 16-17C',           pos: new THREE.Vector3(-37,  6, -10), type: 'pier' },
+        { name: 'T3 Gates 18-35',            pos: new THREE.Vector3(-33,  6,  -3), type: 'pier' },
         // Infrastructure
-        { name: 'Control Tower',             pos: new THREE.Vector3(46, 26, -30),  type: 'atc' },
-        { name: 'Airport Central Station',   pos: new THREE.Vector3(56,  7, -36),  type: 'zone' },
+        { name: 'Control Tower',             pos: new THREE.Vector3(54, 28, -18),  type: 'atc' },
+        { name: 'Airport Central Station',   pos: new THREE.Vector3(64,  7, -14),  type: 'zone' },
         { name: 'Redcliffe Station',         pos: new THREE.Vector3(-74,  6,   6), type: 'zone' },
         // Security
-        { name: 'Security East',             pos: new THREE.Vector3(50,  5,  -8),  type: 'alert' },
-        { name: 'Security West',             pos: new THREE.Vector3(-44,  5, -16), type: 'alert' },
+        { name: 'Security East',             pos: new THREE.Vector3(52,  5, -10),  type: 'alert' },
+        { name: 'Security West',             pos: new THREE.Vector3(-50,  5, -18), type: 'alert' },
         // Transport
-        { name: 'Transport Hub East',        pos: new THREE.Vector3(60,  5,  -8),  type: 'zone' },
-        { name: 'Transport Hub West',        pos: new THREE.Vector3(-34,  5,  -8), type: 'zone' },
+        { name: 'Transport Hub East',        pos: new THREE.Vector3(66,  5,  -6),  type: 'zone' },
+        { name: 'Transport Hub West',        pos: new THREE.Vector3(-37,  5,  -4), type: 'zone' },
         // Support
         { name: 'FIFO Charter Terminal',     pos: new THREE.Vector3(-50,  6,  26), type: 'zone' },
         { name: 'Cargo & Freight',           pos: new THREE.Vector3( 14,  6,  40), type: 'zone' },
         { name: 'Maintenance Hangar',        pos: new THREE.Vector3(-60,  8,  12), type: 'zone' },
-        // Runways
-        { name: 'Runway 03/21  (3,444m)',    pos: new THREE.Vector3(  0,  3, -55), type: 'runway' },
-        { name: 'Runway 06/24  (2,163m)',    pos: new THREE.Vector3(-28,  3,  30), type: 'runway' },
-        { name: 'New Runway 03R/21L (2029)', pos: new THREE.Vector3( 14,  3, -50), type: 'construction' },
+        // Runways — all N-S parallel
+        { name: 'Runway 03/21  (3,444m)',    pos: new THREE.Vector3(  0,  3, -50), type: 'runway' },
+        { name: 'Runway 06/24  (2,163m)',    pos: new THREE.Vector3( -7,  3, -34), type: 'runway' },
+        { name: 'New Runway 03R/21L (2029)', pos: new THREE.Vector3(  9,  3, -46), type: 'construction' },
         // Roads
         { name: 'Airport Drive',             pos: new THREE.Vector3(  0,  3,  36), type: 'zone' },
     ];

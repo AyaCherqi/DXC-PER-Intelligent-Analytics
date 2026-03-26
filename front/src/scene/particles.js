@@ -59,124 +59,131 @@ export function createParticles(scene) {
 // color: [r, g, b] 0-1 range
 // ============================================
 const paths = [
-    // ── EAST PRECINCT — Passengers ──
+    // ── EAST PRECINCT ──
 
-    // 0: Transport Hub East → T1 International (main arrivals flow)
+    // 0: Transport Hub East → T1 International [50,0,-30]
     { id: 0, color: [0.14, 0.74, 0.97], points: [
-        [60, 1.5, -8], [58, 1.5, -12], [55, 1.5, -16], [50, 1.5, -18],
+        [66, 1.5, -6], [62, 1.5, -14], [56, 1.5, -22], [50, 1.5, -30],
     ]},
 
-    // 1: Airport Central Station → T1 via Skybridge
+    // 1: Airport Central Station [64,0,-14] → T1 via Skybridge
     { id: 1, color: [0.14, 0.74, 0.97], points: [
-        [56, 1.5, -36], [55, 1.5, -30], [54, 1.5, -24], [52, 1.5, -20],
+        [64, 1.5, -14], [62, 1.5, -18], [58, 1.5, -24], [52, 1.5, -29],
     ]},
 
-    // 2: T1 International → T1 Domestic Pier (Gates 50-56)
+    // 2: T1 International → T1 Domestic [44,0,-16]
     { id: 2, color: [0.56, 0.85, 0.97], points: [
-        [50, 1.5, -18], [46, 1.5, -18], [40, 1.5, -18], [34, 1.5, -18],
+        [50, 1.5, -30], [48, 1.5, -26], [46, 1.5, -22], [44, 1.5, -16],
     ]},
 
-    // 3: T1 → aircraft apron (boarding)
+    // 3: T1 Domestic → pier Gates 50-56 (extends west from [-44,0,-16])
     { id: 3, color: [0.30, 0.87, 0.55], points: [
-        [44, 1.5, -18], [40, 1.5, -20], [34, 1.5, -22], [28, 1.5, -22],
+        [38, 1.5, -16], [32, 1.5, -18], [26, 1.5, -20], [20, 1.5, -22],
     ]},
 
-    // 4: T1 ↔ T2 walkway connection
+    // 4: T1 Domestic ↔ T2 walkway
     { id: 4, color: [0.14, 0.74, 0.97], points: [
-        [52, 1.5, -5], [51, 1.5, 0], [50, 1.5, 6], [50, 1.5, 12],
+        [50, 1.5, -10], [50, 1.5, -4], [48, 1.5, 4], [44, 1.5, 12],
     ]},
 
-    // 5: Transport Hub East → T2
+    // 5: Transport Hub East → T2 [44,0,12]
     { id: 5, color: [0.20, 0.88, 0.40], points: [
-        [60, 1.5, -8], [58, 1.5, 0], [54, 1.5, 8], [50, 1.5, 14],
+        [66, 1.5, -6], [62, 1.5, 0], [56, 1.5, 6], [44, 1.5, 12],
     ]},
 
     // 6: T2 → SW pier (Gates 1-7)
     { id: 6, color: [0.20, 0.88, 0.40], points: [
-        [44, 1.5, 14], [42, 1.5, 16], [38, 1.5, 20], [34, 1.5, 24],
+        [44, 1.5, 12], [42, 1.5, 16], [38, 1.5, 20], [32, 1.5, 24],
     ]},
 
-    // 7: Security East (T1) flow
+    // 7: Security East flow [52,0,-10]
     { id: 7, color: [0.94, 0.28, 0.28], points: [
-        [50, 1.5, -4], [50, 1.5, -8], [50, 1.5, -12], [50, 1.5, -16],
+        [52, 1.5, -6], [52, 1.5, -10], [52, 1.5, -14], [52, 1.5, -18],
     ]},
 
-    // ── WEST PRECINCT — Passengers ──
+    // ── WEST PRECINCT ──
+    // T4 at [-50,0,-22], T3 at [-50,0,-7]
+    // All piers extend EAST (+X) — apron at x≈-38
 
-    // 8: Transport Hub West → T3
+    // 8: Transport Hub West [-37,0,-4] → T3 [-50,0,-7]
     { id: 8, color: [0.98, 0.75, 0.14], points: [
-        [-34, 1.5, -8], [-38, 1.5, -6], [-42, 1.5, -2], [-44, 1.5, 0],
+        [-37, 1.5, -4], [-42, 1.5, -5], [-46, 1.5, -6], [-50, 1.5, -7],
     ]},
 
-    // 9: Transport Hub West → T4
+    // 9: Transport Hub West → T4 [-50,0,-22]
     { id: 9, color: [0.98, 0.75, 0.14], points: [
-        [-34, 1.5, -8], [-38, 1.5, -12], [-42, 1.5, -18], [-44, 1.5, -22],
+        [-37, 1.5, -4], [-41, 1.5, -10], [-46, 1.5, -16], [-50, 1.5, -22],
     ]},
 
-    // 10: T4 → Gates 7-15 pier (NE direction)
+    // 10: T4 → Gates 7-15 pier (extends EAST from [-44,0,-22])
     { id: 10, color: [0.94, 0.55, 0.14], points: [
-        [-44, 1.5, -22], [-42, 1.5, -26], [-36, 1.5, -30], [-30, 1.5, -34],
+        [-44, 1.5, -22], [-40, 1.5, -22], [-36, 1.5, -22], [-30, 1.5, -22],
     ]},
 
-    // 11: T3 → North Pier (Gates 16-17C)
+    // 11: T3 → North Pier Gates 16-17C (extends EAST from [-43,0,-10])
     { id: 11, color: [0.98, 0.75, 0.14], points: [
-        [-44, 1.5, -1], [-44, 1.5, -6], [-44, 1.5, -10], [-44, 1.5, -14],
+        [-43, 1.5, -10], [-39, 1.5, -10], [-35, 1.5, -10], [-31, 1.5, -10],
     ]},
 
-    // 12: T3 → South Pier (Gates 18-35)
+    // 12: T3 → South Pier Gates 18-35 (extends EAST from [-43,0,-3])
     { id: 12, color: [0.98, 0.75, 0.14], points: [
-        [-44, 1.5, -1], [-44, 1.5, 5], [-44, 1.5, 12], [-44, 1.5, 20],
+        [-43, 1.5, -3], [-37, 1.5, -3], [-31, 1.5, -3], [-25, 1.5, -3],
     ]},
 
-    // 13: Security West flow
+    // 13: Security West flow [-50,0,-18]
     { id: 13, color: [0.94, 0.28, 0.28], points: [
-        [-44, 1.5, -10], [-44, 1.5, -14], [-44, 1.5, -18], [-44, 1.5, -22],
+        [-50, 1.5, -14], [-50, 1.5, -18], [-50, 1.5, -22], [-50, 1.5, -26],
+    ]},
+
+    // 14: T3 ↔ T4 internal corridor flow (N-S through connector)
+    { id: 14, color: [0.98, 0.65, 0.20], points: [
+        [-50, 1.5, -22], [-50, 1.5, -18], [-50, 1.5, -14], [-50, 1.5, -10],
     ]},
 
     // ── SHUTTLE — East ↔ West precinct ──
 
-    // 14: E→W shuttle along Airport Drive
-    { id: 14, color: [0.27, 0.92, 0.45], points: [
-        [58, 1.5, 34], [30, 1.5, 34], [0, 1.5, 34], [-30, 1.5, 34],
+    // 15: E→W shuttle along Airport Drive
+    { id: 15, color: [0.27, 0.92, 0.45], points: [
+        [60, 1.5, 34], [30, 1.5, 34], [0, 1.5, 34], [-30, 1.5, 34],
     ]},
 
-    // 15: W→E shuttle return
-    { id: 15, color: [0.27, 0.92, 0.45], points: [
-        [-30, 1.5, 30], [0, 1.5, 30], [30, 1.5, 30], [58, 1.5, 30],
+    // 16: W→E shuttle return
+    { id: 16, color: [0.27, 0.92, 0.45], points: [
+        [-30, 1.5, 30], [0, 1.5, 30], [30, 1.5, 30], [60, 1.5, 30],
     ]},
 
     // ── CARGO & FIFO ──
 
-    // 16: Cargo apron flow
-    { id: 16, color: [0.65, 0.55, 0.97], points: [
+    // 17: Cargo apron flow
+    { id: 17, color: [0.65, 0.55, 0.97], points: [
         [6, 1.5, 44], [10, 1.5, 42], [14, 1.5, 40], [20, 1.5, 38],
     ]},
 
-    // 17: FIFO charter flow
-    { id: 17, color: [0.65, 0.55, 0.97], points: [
+    // 18: FIFO charter flow [-50,0,26]
+    { id: 18, color: [0.65, 0.55, 0.97], points: [
         [-50, 1.5, 32], [-50, 1.5, 28], [-50, 1.5, 26], [-44, 1.5, 22],
     ]},
 
-    // ── AIRCRAFT TAXI FLOW (on main taxiways) ──
+    // ── VEHICLE FLOWS ──
 
-    // 18: Aircraft taxiing east (toward T1 apron) — follows east parallel taxiway
-    { id: 18, color: [0.55, 0.55, 0.65], points: [
-        [8, 1.5, -40], [10, 1.5, -20], [12, 1.5, 0], [14, 1.5, 20],
+    // 19: Vehicles on T1/T2 access road (east side, N-S)
+    { id: 19, color: [0.36, 0.74, 0.97], points: [
+        [66, 1.5, -30], [66, 1.5, -18], [66, 1.5, -6], [66, 1.5, 6],
     ]},
 
-    // 19: Aircraft taxiing west (toward T3 apron) — follows west parallel taxiway
-    { id: 19, color: [0.55, 0.55, 0.65], points: [
+    // 20: Vehicles on T3/T4 access road (east face, N-S at x=-37)
+    { id: 20, color: [0.98, 0.75, 0.14], points: [
+        [-37, 1.5, -28], [-37, 1.5, -18], [-37, 1.5, -8], [-37, 1.5, 2],
+    ]},
+
+    // 21: Aircraft taxi E (N-S along east runway parallel)
+    { id: 21, color: [0.55, 0.55, 0.65], points: [
+        [8, 1.5, -40], [8, 1.5, -20], [8, 1.5, 0], [8, 1.5, 20],
+    ]},
+
+    // 22: Aircraft taxi W (N-S along west runway parallel)
+    { id: 22, color: [0.55, 0.55, 0.65], points: [
         [-8, 1.5, 30], [-8, 1.5, 10], [-8, 1.5, -10], [-8, 1.5, -30],
-    ]},
-
-    // 20: Vehicles on T1/T2 access road (north-south, east side)
-    { id: 20, color: [0.36, 0.74, 0.97], points: [
-        [60, 1.5, -28], [60, 1.5, -18], [60, 1.5, -8], [60, 1.5, 2],
-    ]},
-
-    // 21: Vehicles on T3/T4 access road (west side)
-    { id: 21, color: [0.98, 0.75, 0.14], points: [
-        [-34, 1.5, -26], [-34, 1.5, -16], [-34, 1.5, -6], [-34, 1.5, 4],
     ]},
 ];
 

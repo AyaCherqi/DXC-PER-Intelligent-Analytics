@@ -51,50 +51,64 @@ export function createBuildings(scene) {
     const zoneObjects = {};
 
     // =========================================
-    // RUNWAYS — centered between east & west precincts
-    // Straight N-S (rotation=0) for clean visual alignment
-    // Main 03/21: 3,444m → ~86 units, cross 06/24: 2,163m → ~54 units
+    // RUNWAYS — all parallel N-S, offset in X
+    // Main 03/21: 3,444m, Cross 06/24: 2,163m (shorter), New 03R/21L: under construction
     // =========================================
 
-    // Main runway 03/21 — runs N-S, centered at x=0
+    // Main runway 03/21 — N-S, centered between precincts
     zoneObjects['runway-main'] = createRunway(scene, [0, 0, 0], 90, 0, 'runway-main', 'Runway 03/21');
 
-    // Cross runway 06/24 — runs E-W, centered and shorter
-    zoneObjects['runway-cross'] = createRunway(scene, [0, 0, 8], 58, Math.PI / 2, 'runway-cross', 'Runway 06/24');
+    // Cross runway 06/24 — NOW PARALLEL (N-S), shorter, offset west
+    zoneObjects['runway-cross'] = createRunway(scene, [-7, 0, 0], 58, 0, 'runway-cross', 'Runway 06/24');
 
-    // New runway 03R/21L (construction 2025–2029) — parallel to main, east of it
-    zoneObjects['runway-new'] = createRunwayUnderConstruction(scene, [10, 0, 0], 80, 0, 'runway-new', 'Runway 03R/21L (Under Construction)');
+    // New runway 03R/21L (construction 2025–2029) — parallel, east of main
+    zoneObjects['runway-new'] = createRunwayUnderConstruction(scene, [9, 0, 0], 80, 0, 'runway-new', 'Runway 03R/21L (Under Construction)');
 
     // =========================================
     // APRONS
     // =========================================
 
     // East apron (T1 gates area)
-    zoneObjects['apron-east'] = createApron(scene, [34, 0, -20], [22, 28], 'apron-east', 'East Apron (T1)');
+    zoneObjects['apron-east'] = createApron(scene, [32, 0, -20], [20, 28], 'apron-east', 'East Apron (T1)');
     // East apron extension (T2 gates area)
-    zoneObjects['apron-t2'] = createApron(scene, [30, 0, 14], [18, 22], 'apron-t2', 'East Apron (T2)');
-    // West apron (T3/T4 gates area)
-    zoneObjects['apron-west'] = createApron(scene, [-50, 0, -8], [22, 42], 'apron-west', 'West Apron (T3/T4)');
+    zoneObjects['apron-t2'] = createApron(scene, [28, 0, 14], [16, 22], 'apron-t2', 'East Apron (T2)');
+    // West apron — EAST face of T3/T4, facing runway (not behind terminals)
+    zoneObjects['apron-west'] = createApron(scene, [-32, 0, -8], [20, 42], 'apron-west', 'West Apron (T3/T4)');
 
     // =========================================
     // EAST PRECINCT
+    // Layout from official map:
+    //   T1 International (north, large) | T1 Domestic (west, adjacent)
+    //   Control Tower in center of circular road loop
+    //   Airport Central Station southeast, skybridge to T1 Intl
     // =========================================
 
-    // --- T1 International --- 
-    // Large curved main body, two storeys, primary international terminal
+    // --- T1 International (NORTH / top block) ---
     zoneObjects['t1-international'] = createTerminal(scene, {
         id: 't1-international',
-        position: [50, 0, -18],
-        size: [20, 7, 13],
+        position: [50, 0, -30],
+        size: [18, 7, 12],
         color: C.t1,
         label: 'T1 International',
     });
 
-    // T1 Domestic Pier — Gates 50-56, extends WEST toward runway
+    // --- T1 Domestic (SOUTH / below T1 Intl, directly adjacent) ---
+    zoneObjects['t1-domestic'] = createTerminal(scene, {
+        id: 't1-domestic',
+        position: [44, 0, -16],
+        size: [14, 6, 10],
+        color: 0x1e4a80,
+        label: 'T1 Domestic (Virgin)',
+    });
+
+    // Covered connector between T1 Intl and T1 Domestic
+    createSkybridge(scene, [50, 4, -24], [46, 4, -21]);
+
+    // T1 pier — Gates 50-56, west from T1 Domestic
     zoneObjects['t1-pier'] = createStraightPier(scene, {
         id: 't1-pier',
-        position: [44, 0, -18],  // starts at west face of T1
-        length: 24,
+        position: [38, 0, -16],
+        length: 20,
         axis: 'x-neg',
         width: 4,
         height: 3.5,
@@ -103,67 +117,70 @@ export function createBuildings(scene) {
         label: 'T1 Gates 50-56',
     });
 
-    // T1 aircraft at gates
+    // T1 aircraft at gates (west face of pier)
     [
-        [32, 0, -26], [28, 0, -24], [24, 0, -22], [20, 0, -20],
-        [32, 0, -10], [28, 0, -12], [24, 0, -14], [36, 0, -22],
+        [26, 0, -22], [22, 0, -20], [18, 0, -18], [14, 0, -16],
+        [26, 0, -10], [22, 0, -12], [18, 0, -14], [30, 0, -24],
     ].forEach(p => createAircraft(scene, p));
 
     // T1 Pick-up / Drop-off (east kerb)
     zoneObjects['t1-pickup'] = createBox(scene, {
         id: 't1-pickup',
-        position: [63, 0, -18],
+        position: [64, 0, -24],
         size: [5, 1.5, 10],
         color: 0x2a5050,
         label: 'T1 Drop-off & Pick-up',
     });
 
     // --- T2 Regional ---
-    // Southwest of T1, long finger-shaped building
     zoneObjects['t2-regional'] = createTerminal(scene, {
         id: 't2-regional',
-        position: [44, 0, 14],
+        position: [44, 0, 12],
         size: [10, 5, 7],
         color: C.t2,
         label: 'T2 Regional',
     });
 
-    // T2 SW finger pier — Gates 1-7 extending SW
-    // SW direction: angle = -PI/4
+    // T2 SW finger pier — Gates 1-7
     zoneObjects['t2-pier'] = createAngledPier(scene, {
         id: 't2-pier',
-        startPos: [39, 0, 18],
+        startPos: [39, 0, 16],
         angle: -Math.PI / 4,
-        length: 30,
+        length: 28,
         gateCount: 7,
         color: C.t2,
         label: 'T2 Gates 1-7',
     });
 
-    // T2 aircraft at gates
+    // T2 aircraft
     [
-        [32, 0, 22], [28, 0, 26], [24, 0, 30],
-        [20, 0, 34], [30, 0, 16], [26, 0, 20],
+        [30, 0, 20], [26, 0, 24], [22, 0, 28],
+        [18, 0, 32], [28, 0, 14], [24, 0, 18],
     ].forEach(p => createAircraft(scene, p));
 
     // T2 Pick-up / Drop-off
     zoneObjects['t2-pickup'] = createBox(scene, {
         id: 't2-pickup',
-        position: [54, 0, 20],
+        position: [54, 0, 18],
         size: [5, 1.5, 8],
         color: 0x2a5050,
         label: 'T2 Drop-off & Pick-up',
     });
 
     // --- T1 ↔ T2 Covered Walkway ---
-    // Elevated connection between T1 and T2 (about 5-min walk)
-    zoneObjects['t1-t2-walkway'] = createSkybridgeZone(scene, [52, 3, -5], [50, 3, 8], 't1-t2-walkway', 'T1–T2 Covered Walkway');
+    zoneObjects['t1-t2-walkway'] = createSkybridgeZone(scene, [50, 3, -10], [48, 3, 6], 't1-t2-walkway', 'T1–T2 Covered Walkway');
+
+    // ─── CIRCULAR ROAD CLUSTER ───
+    // Control Tower: center of road loop between T1 Intl and T1 Domestic
+    // Airport Central Station: southeast of T1, skybridge arcs to T1 Intl
+
+    // --- Control Tower ---
+    zoneObjects['control-tower'] = createControlTower(scene, [54, 0, -18]);
 
     // --- Airport Central Station ---
-    // Underground station, ~250m NW of T1, opened 2022
     zoneObjects['airport-central'] = createBox(scene, {
         id: 'airport-central',
-        position: [56, 0, -36],
+        position: [64, 0, -14],
         size: [8, 4, 7],
         color: C.station,
         emissiveColor: C.accent,
@@ -171,17 +188,15 @@ export function createBuildings(scene) {
         label: 'Airport Central Station',
     });
 
-    // Skybridge — 280m elevated walkway from station to T1
-    zoneObjects['skybridge-station'] = createSkybridgeZone(scene, [56, 4.5, -32], [55, 4.5, -26], 'skybridge-station', 'Airport Central Skybridge');
-    createSkybridge(scene, [55, 4.5, -26], [53, 4, -20]);
-
-    // --- Control Tower ---
-    zoneObjects['control-tower'] = createControlTower(scene, [46, 0, -30]);
+    // Skybridge — station → T1 International
+    zoneObjects['skybridge-station'] = createSkybridgeZone(scene, [62, 4.5, -16], [58, 4.5, -22], 'skybridge-station', 'Airport Central Skybridge');
+    createSkybridge(scene, [58, 4.5, -22], [55, 4, -27]);
+    createSkybridge(scene, [55, 4, -27], [52, 3.5, -30]);
 
     // --- Security East ---
     zoneObjects['security-east'] = createBox(scene, {
         id: 'security-east',
-        position: [50, 0, -8],
+        position: [52, 0, -10],
         size: [6, 2.5, 3],
         color: 0x5a3030,
         label: 'Security East (T1/T2)',
@@ -190,7 +205,7 @@ export function createBuildings(scene) {
     // --- Lounges (East) ---
     zoneObjects['virgin-lounge'] = createBox(scene, {
         id: 'virgin-lounge',
-        position: [52, 0, -14],
+        position: [38, 0, -30],
         size: [4, 2.5, 3],
         color: 0x6a3070,
         emissiveColor: 0xa78bfa,
@@ -199,7 +214,7 @@ export function createBuildings(scene) {
     });
     zoneObjects['aspire-lounge'] = createBox(scene, {
         id: 'aspire-lounge',
-        position: [52, 0, -22],
+        position: [54, 0, -30],
         size: [4, 2.5, 3],
         color: 0x3a5a3a,
         emissiveColor: 0x4ade80,
@@ -208,7 +223,7 @@ export function createBuildings(scene) {
     });
     zoneObjects['alliance-lounge'] = createBox(scene, {
         id: 'alliance-lounge',
-        position: [50, 0, 10],
+        position: [50, 0, 8],
         size: [3.5, 2, 2.5],
         color: 0x4a5a3a,
         label: 'Alliance Lounge (T2)',
@@ -217,96 +232,115 @@ export function createBuildings(scene) {
     // --- Transport Hub East ---
     zoneObjects['transport-east'] = createBox(scene, {
         id: 'transport-east',
-        position: [60, 0, -8],
+        position: [66, 0, -6],
         size: [6, 2, 4],
         color: 0x2a5050,
         label: 'Transport Hub East',
     });
 
-    // --- Car Rental & Rideshare ---
+    // --- Car Rental (inside circular road, per map) ---
     zoneObjects['car-rental'] = createBox(scene, {
         id: 'car-rental',
-        position: [64, 0, -24],
+        position: [56, 0, -14],
         size: [5, 1.5, 4],
         color: 0x3a4a3a,
         label: 'Car Rental',
     });
 
     // --- Parking (East Precinct) ---
-    zoneObjects['parking-east-p1'] = createParkingStructure(scene, [62, 0, -14], 8, 5, 6, 'parking-east-p1', 'Parking P1 (Short Stay)');
-    zoneObjects['parking-east-p2'] = createParkingStructure(scene, [62, 0, 2],   9, 4, 5, 'parking-east-p2', 'Parking P2 (Long Stay)');
-    zoneObjects['parking-east-p3'] = createParkingStructure(scene, [62, 0, 14],  9, 3, 4, 'parking-east-p3', 'Parking P3 (Value)');
+    zoneObjects['parking-east-p1'] = createParkingStructure(scene, [68, 0, -20], 8, 5, 6, 'parking-east-p1', 'Parking P1 (Short Stay)');
+    zoneObjects['parking-east-p2'] = createParkingStructure(scene, [68, 0, -8],  9, 4, 5, 'parking-east-p2', 'Parking P2 (Long Stay)');
+    zoneObjects['parking-east-p3'] = createParkingStructure(scene, [68, 0, 6],   9, 3, 4, 'parking-east-p3', 'Parking P3 (Value)');
 
     // =========================================
-    // WEST PRECINCT
+    // WEST PRECINCT — T3 and T4
+    //
+    // Layout (top = north = -Z):
+    //   T4  [-50, z=-22]  south face z=-17.5
+    //   connector          z=-15  (thin flush strip)
+    //   T3  [-50, z=-7]   north face z=-12.5
+    //
+    // ALL piers extend EAST (+X) from east face of each terminal
+    //   T4 east face  = x = -50+6 = -44  → pier starts [-44, 0, -22]
+    //   T3 east face  = x = -50+7 = -43  → piers start [-43, 0, ...]
+    //
+    // Apron on east side, between terminals and runways
     // =========================================
 
-    // --- T4 Qantas (NORTH of T3) ---
-    // 9 gates (Gates 7-15), 4 jetways, Qantas domestic
+    // West apron — east face of T3/T4 cluster facing runway
+    zoneObjects['apron-west'] = createApron(scene, [-38, 0, -10], [16, 40], 'apron-west', 'West Apron (T3/T4)');
+
+    // ── T4 Qantas (NORTH) ──
+    // size [12, 5, 9]: x-width=12, z-depth=9 → south face at z = -22+4.5 = -17.5
     zoneObjects['t4-qantas'] = createTerminal(scene, {
         id: 't4-qantas',
-        position: [-44, 0, -22],
+        position: [-50, 0, -22],
         size: [12, 5, 9],
         color: C.t4,
         label: 'T4 Qantas',
     });
 
-    // T4 pier — Gates 7-15 extending NE toward runway
-    // NE direction: angle = PI * 3/4
-    zoneObjects['t4-pier'] = createAngledPier(scene, {
+    // T4 pier — Gates 7-15, extends EAST (+X) from east face [-44, 0, -22]
+    zoneObjects['t4-pier'] = createStraightPier(scene, {
         id: 't4-pier',
-        startPos: [-38, 0, -26],
-        angle: Math.PI * 3 / 4,
-        length: 22,
+        position: [-44, 0, -22],
+        length: 16,
+        axis: 'x-pos',
+        width: 4,
+        height: 3.5,
         gateCount: 9,
         color: C.t4,
         label: 'T4 Gates 7-15',
     });
 
-    // T4 aircraft
+    // T4 aircraft on east/apron side
     [
-        [-30, 0, -34], [-26, 0, -32], [-22, 0, -30],
-        [-28, 0, -26], [-24, 0, -28], [-20, 0, -26],
+        [-34, 0, -26], [-30, 0, -26], [-26, 0, -26],
+        [-34, 0, -18], [-30, 0, -18], [-26, 0, -18],
     ].forEach(p => createAircraft(scene, p));
 
-    // --- T3 ↔ T4 Connector (shared landside building) ---
+    // ── T3/T4 CONNECTOR — flush strip between terminals ──
+    // Same x-position and x-width as T4, filling the gap
+    // z from -16.5 to -13.5 (3 units, bridging gap between terminals)
     zoneObjects['t3-t4-connector'] = createBox(scene, {
         id: 't3-t4-connector',
-        position: [-44, 0, -12],
-        size: [10, 4, 4],
-        color: 0x504030,
+        position: [-50, 0, -15],
+        size: [12, 4.5, 3],
+        color: 0x4a3820,
         label: 'T3–T4 Connector',
     });
 
-    // --- T3 Qantas (SOUTH of T4) ---
-    // 9 gates (16-35), 5 jetways, domestic + international (customs/immigration)
+    // ── T3 Qantas (SOUTH) ──
+    // size [14, 5.5, 11]: x-width=14, z-depth=11 → north face at z = -7-5.5 = -12.5
+    // (touches connector south face at z = -15+1.5 = -13.5, 1-unit gap = corridor)
     zoneObjects['t3-qantas'] = createTerminal(scene, {
         id: 't3-qantas',
-        position: [-44, 0, -1],
-        size: [14, 5.5, 10],
+        position: [-50, 0, -7],
+        size: [14, 5.5, 11],
         color: C.t3,
         label: 'T3 Qantas',
     });
 
-    // T3 North Pier — Gates 16-17C (short, international section)
+    // T3 North Pier — Gates 16-17C, extends EAST from north section of T3
+    // east face of T3 = -50+7 = -43, north part of T3 center at z=-10
     zoneObjects['t3-pier-north'] = createStraightPier(scene, {
         id: 't3-pier-north',
-        position: [-44, 0, -6],
-        length: 14,
-        axis: 'z-neg',
-        width: 4,
+        position: [-43, 0, -10],
+        length: 12,
+        axis: 'x-pos',
+        width: 3.5,
         height: 3.5,
         gateCount: 4,
         color: C.t3,
         label: 'T3 Gates 16-17C',
     });
 
-    // T3 South Pier — Gates 18-35 (long, domestic section)
+    // T3 South Pier — Gates 18-35, extends EAST from south section of T3
     zoneObjects['t3-pier-south'] = createStraightPier(scene, {
         id: 't3-pier-south',
-        position: [-44, 0, 4],
-        length: 26,
-        axis: 'z-pos',
+        position: [-43, 0, -3],
+        length: 20,
+        axis: 'x-pos',
         width: 4,
         height: 3.5,
         gateCount: 10,
@@ -314,18 +348,19 @@ export function createBuildings(scene) {
         label: 'T3 Gates 18-35',
     });
 
-    // T3 aircraft
+    // T3 aircraft on east/apron side (parked along both piers)
     [
-        [-52, 0, -12], [-52, 0, -16], [-52, 0, -8], [-52, 0, -4],
-        [-52, 0, 4], [-52, 0, 8], [-52, 0, 12], [-52, 0, 16],
-        [-52, 0, 20], [-40, 0, -16], [-40, 0, 14],
+        [-32, 0, -14], [-28, 0, -14], [-24, 0, -14],
+        [-32, 0, -6],  [-28, 0, -6],  [-24, 0, -6],
+        [-32, 0,  2],  [-28, 0,  2],  [-24, 0,  2],
+        [-32, 0,  10], [-28, 0,  10],
     ].forEach(p => createAircraft(scene, p));
 
-    // T3/T4 Pick-up / Drop-off (east side, road-facing)
+    // T3/T4 Pick-up / Drop-off (landside east, road-facing at x≈-37)
     zoneObjects['t3-pickup'] = createBox(scene, {
         id: 't3-pickup',
-        position: [-32, 0, -12],
-        size: [4, 1.5, 12],
+        position: [-37, 0, -14],
+        size: [4, 1.5, 16],
         color: 0x2a5050,
         label: 'T3/T4 Drop-off & Pick-up',
     });
@@ -333,16 +368,16 @@ export function createBuildings(scene) {
     // --- Security West ---
     zoneObjects['security-west'] = createBox(scene, {
         id: 'security-west',
-        position: [-44, 0, -16],
+        position: [-50, 0, -18],
         size: [6, 2.5, 3],
         color: 0x5a3030,
         label: 'Security West (T3/T4)',
     });
 
-    // --- Qantas Lounges (West) ---
+    // --- Qantas Lounges (inside T4 airside) ---
     zoneObjects['qantas-club'] = createBox(scene, {
         id: 'qantas-club',
-        position: [-54, 0, -20],
+        position: [-54, 0, -24],
         size: [5, 2.5, 4],
         color: 0x8a2a2a,
         emissiveColor: 0xef4444,
@@ -351,7 +386,7 @@ export function createBuildings(scene) {
     });
     zoneObjects['qantas-business'] = createBox(scene, {
         id: 'qantas-business',
-        position: [-54, 0, -28],
+        position: [-54, 0, -16],
         size: [5, 2.5, 4],
         color: 0x8a2a2a,
         emissiveColor: 0xfbbf24,
@@ -362,16 +397,17 @@ export function createBuildings(scene) {
     // --- Transport Hub West ---
     zoneObjects['transport-west'] = createBox(scene, {
         id: 'transport-west',
-        position: [-34, 0, -8],
+        position: [-37, 0, -4],
         size: [6, 2, 4],
         color: 0x2a5050,
         label: 'Transport Hub West',
     });
 
     // --- Parking (West Precinct) ---
-    // P4 behind T4 (northwest, airside of T4)
-    zoneObjects['parking-west-p1'] = createParkingStructure(scene, [-56, 0, -28], 8, 4, 6, 'parking-west-p1', 'Parking P4 (Qantas Short Stay)');
-    zoneObjects['parking-west-p2'] = createParkingStructure(scene, [-34, 0, 6],   7, 3, 5, 'parking-west-p2', 'Parking P5 (West Long Stay)');
+    // P4 behind T4 (west, landside)
+    zoneObjects['parking-west-p1'] = createParkingStructure(scene, [-62, 0, -22], 8, 4, 6, 'parking-west-p1', 'Parking P4 (Qantas Short Stay)');
+    // P5 behind T3 (west, landside)
+    zoneObjects['parking-west-p2'] = createParkingStructure(scene, [-62, 0, -6],  7, 3, 5, 'parking-west-p2', 'Parking P5 (West Long Stay)');
 
     // --- Redcliffe Train Station (far west, serves T3/T4 via Bus 292) ---
     zoneObjects['redcliffe-station'] = createBox(scene, {
@@ -537,8 +573,10 @@ function createStraightPier(scene, config) {
     const group = new THREE.Group();
     group.userData = { zoneId: config.id, label: config.label };
     const { length: len, width: w, height: h, axis, gateCount } = config;
-    const isX    = axis === 'x-neg';
-    const isZneg = axis === 'z-neg';
+    const isXneg  = axis === 'x-neg';
+    const isXpos  = axis === 'x-pos';
+    const isX     = isXneg || isXpos;
+    const isZneg  = axis === 'z-neg';
 
     // Corridor
     const cGeo = isX
@@ -550,9 +588,10 @@ function createStraightPier(scene, config) {
         emissive: 0x1a3050, emissiveIntensity: 0.2,
     });
     const corridor = new THREE.Mesh(cGeo, cMat);
-    if (isX)       corridor.position.set(-len / 2, h / 2, 0);
+    if (isXneg)      corridor.position.set(-len / 2, h / 2, 0);
+    else if (isXpos) corridor.position.set( len / 2, h / 2, 0);
     else if (isZneg) corridor.position.set(0, h / 2, -len / 2);
-    else             corridor.position.set(0, h / 2, len / 2);
+    else             corridor.position.set(0, h / 2,  len / 2);
     corridor.castShadow = true;
     group.add(corridor);
 
@@ -565,9 +604,10 @@ function createStraightPier(scene, config) {
         ? new THREE.BoxGeometry(len, h * 0.55, 0.12)
         : new THREE.BoxGeometry(0.12, h * 0.55, len);
     if (isX) {
+        const cx = isXneg ? -len / 2 : len / 2;
         [-w / 2 - 0.06, w / 2 + 0.06].forEach(z => {
             const g = new THREE.Mesh(gGeo, glassMat);
-            g.position.set(-len / 2, h * 0.4, z);
+            g.position.set(cx, h * 0.4, z);
             group.add(g);
         });
     } else {
@@ -595,8 +635,9 @@ function createStraightPier(scene, config) {
         const st = new THREE.Mesh(sGeo, standMat);
 
         if (isX) {
-            br.position.set(-gs * (i + 0.5), 0.2, side * (w / 2 + 1.9));
-            st.position.set(-gs * (i + 0.5), 0.04, side * (w / 2 + 3.2));
+            const xOffset = isXneg ? -gs * (i + 0.5) : gs * (i + 0.5);
+            br.position.set(xOffset, 0.2, side * (w / 2 + 1.9));
+            st.position.set(xOffset, 0.04, side * (w / 2 + 3.2));
         } else {
             const dir = isZneg ? -1 : 1;
             br.position.set(side * (w / 2 + 1.9), 0.2, dir * gs * (i + 0.5));

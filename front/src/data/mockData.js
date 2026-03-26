@@ -367,8 +367,7 @@ export const kpiData = {
 export const zones = [
   // ── Terminals ──
   { id: 't1-international', name: 'Terminal 1 International', type: 'terminal', status: 'operational', pax: 4200, capacity: 6000 },
-  { id: 't1-domestic',      name: 'Terminal 1 Domestic (Virgin)', type: 'terminal', status: 'operational', pax: 3100, capacity: 4500 },
-  { id: 't2-regional',      name: 'Terminal 2 (Regional)', type: 'terminal', status: 'operational', pax: 1800, capacity: 3000 },
+  { id: 't1-domestic',      name: 'Terminal 1 Domestic (Virgin)', type: 'terminal', status: 'operational', pax: 3100, capacity: 4500 },  { id: 't2-regional',      name: 'Terminal 2 (Regional)', type: 'terminal', status: 'operational', pax: 1800, capacity: 3000 },
   { id: 't3-qantas',        name: 'Terminal 3 (Qantas)', type: 'terminal', status: 'operational', pax: 3400, capacity: 5000 },
   { id: 't4-qantas',        name: 'Terminal 4 (Qantas Domestic)', type: 'terminal', status: 'warning', pax: 2800, capacity: 3500 },
 
@@ -475,7 +474,6 @@ export const zoneKpis = {
     energy: { consumption: '0.6 MW', peak: '0.9 MW', efficiency: 92, trend: [0.5, 0.5, 0.6, 0.7, 0.6, 0.7, 0.6] },
     satisfaction: { score: 84, avgWait: '6.4 min (FIFO SLA +10 min tolerance)', complaints: 4 },
     security: { threatLevel: 'Medium', incidents: 1, cameras: 68, uptime: 99.6 },
-    revenue: { daily: 'AUD 180K', retail: 'AUD 52K', fAndB: 'AUD 38K', dutyfree: 'AUD 90K' },
     flights: { departures: 12, arrivals: 8, delayed: 2, onTime: 90 },
     activeAlerts: 3,
     trend: [28, 36, 46, 56, 62, 60, 58]

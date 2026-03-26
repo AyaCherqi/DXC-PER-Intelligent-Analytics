@@ -16,8 +16,8 @@ export function initSidebar() {
     // Logo
     const logo = el('div', { className: 'sidebar-logo' }, [
         el('img', {
-            src: '/assets/ksia-logo.png',
-            alt: 'KSIA',
+            src: '/assets/per-logo.png',
+            alt: 'Perth Airport',
             style: { width: '38px', height: '38px', objectFit: 'contain', borderRadius: '50%' }
         }),
     ]);
