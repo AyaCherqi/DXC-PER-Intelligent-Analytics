@@ -6,6 +6,7 @@ import { el, $, $$, icons, bus } from '../utils/helpers.js';
 const navItems = [
     { id: 'dashboard', icon: icons.dashboard, label: 'Dashboard', route: '#dashboard' },
     { id: 'alerts', icon: icons.alerts, label: 'Alert Center', route: '#alerts' },
+    { id: 'terminal-kpis', icon: icons.analytics, label: 'Terminal Analytics', route: '#terminal-kpis' },
 ];
 
 export function initSidebar() {
@@ -61,7 +62,8 @@ export function initSidebar() {
     // Listen for route changes
     bus.on('route:change', (route) => {
         $$('.sidebar-nav-item').forEach(n => n.classList.remove('active'));
-        const activeId = route === 'alerts' ? 'alerts' : 'dashboard';
+        const routeMap = { alerts: 'alerts', 'terminal-kpis': 'terminal-kpis' };
+        const activeId = routeMap[route] || 'dashboard';
         const activeEl = $(`[data-nav="${activeId}"]`);
         if (activeEl) activeEl.classList.add('active');
     });

@@ -475,6 +475,7 @@ export const zoneKpis = {
     energy: { consumption: '0.6 MW', peak: '0.9 MW', efficiency: 92, trend: [0.5, 0.5, 0.6, 0.7, 0.6, 0.7, 0.6] },
     satisfaction: { score: 84, avgWait: '6.4 min (FIFO SLA +10 min tolerance)', complaints: 4 },
     security: { threatLevel: 'Medium', incidents: 1, cameras: 68, uptime: 99.6 },
+    revenue: { daily: 'AUD 180K', retail: 'AUD 52K', fAndB: 'AUD 38K', dutyfree: 'AUD 90K' },
     flights: { departures: 12, arrivals: 8, delayed: 2, onTime: 90 },
     activeAlerts: 3,
     trend: [28, 36, 46, 56, 62, 60, 58]

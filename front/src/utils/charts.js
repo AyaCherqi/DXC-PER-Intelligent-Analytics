@@ -37,7 +37,7 @@ function baseOptions(opts = {}) {
     };
 }
 
-export function createSparkline(canvas, data, color = '#38bdf8') {
+export function createSparkline(canvas, data, color = '#38bdf8', showYAxis = false) {
     return new Chart(canvas, {
         type: 'line',
         data: {
@@ -54,7 +54,16 @@ export function createSparkline(canvas, data, color = '#38bdf8') {
                 tension: 0.4,
             }]
         },
-        options: baseOptions()
+        options: baseOptions({
+            scales: showYAxis ? {
+                x: { display: false },
+                y: { 
+                    display: true, 
+                    grid: { color: gridColor, drawBorder: false }, 
+                    ticks: { color: tickColor, font: { family: fontFamily, size: 8 }, maxTicksLimit: 3 } 
+                }
+            } : defaultScales
+        })
     });
 }
 
