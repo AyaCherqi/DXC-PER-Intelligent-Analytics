@@ -24,7 +24,7 @@ import { initAlertCenter } from './pages/alertCenter.js';
 import { initTerminalAnalytics } from './pages/terminalAnalytics.js';
 
 // Router
-import { registerRoute, initRouter } from './router.js';
+import { registerRoute, initRouter, navigateTo } from './router.js';
 
 // Utils
 import { bus, el, $ } from './utils/helpers.js';
@@ -109,7 +109,10 @@ function showAlerts() {
 // ============================================
 // Terminal Analytics View
 // ============================================
-function showTerminalKpis() {
+// Terminal IDs that have analytics pages
+const terminalIds = ['t1-international', 't1-domestic', 't2-regional', 't3-qantas', 't4-qantas'];
+
+function showTerminalKpis(params = {}) {
   const viewport = $('#viewport');
   const rightPanel = $('#right-panel');
   const timeline = $('#timeline');
@@ -122,8 +125,8 @@ function showTerminalKpis() {
   rightPanel.classList.add('hidden');
   timeline.classList.add('hidden');
 
-  // Render terminal analytics
-  initTerminalAnalytics(viewport);
+  // Render terminal analytics with optional pre-selected terminal
+  initTerminalAnalytics(viewport, params.terminal || null);
 }
 
 // ============================================
@@ -328,6 +331,23 @@ function showZoneInfo(zone) {
   }
 
   popup.appendChild(details);
+
+  // ── "View Details" button for terminal zones ──
+  if (terminalIds.includes(zone.id)) {
+    const btnRow = el('div', { style: { padding: '8px 12px 4px', borderTop: '1px solid rgba(255,255,255,0.06)' } });
+    const detailsBtn = el('button', {
+      className: 'zkp-details-btn',
+      innerHTML: 'View Details <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-left:4px"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>',
+      onClick: (e) => {
+        e.stopPropagation();
+        dismissPanel();
+        navigateTo(`terminal-kpis?terminal=${zone.id}`);
+      }
+    });
+    btnRow.appendChild(detailsBtn);
+    popup.appendChild(btnRow);
+  }
+
   finishPopup(popup, viewport);
 }
 

@@ -1,5 +1,5 @@
 // ============================================
-// KSIA Smart Airport – Simple Hash Router
+// PER Smart Airport – Simple Hash Router
 // ============================================
 import { bus } from './utils/helpers.js';
 
@@ -16,10 +16,18 @@ export function initRouter() {
 }
 
 function handleRoute() {
-    const hash = window.location.hash.replace('#', '') || 'dashboard';
-    bus.emit('route:change', hash);
-    if (routes[hash]) {
-        routes[hash]();
+    const raw = window.location.hash.replace('#', '') || 'dashboard';
+    const [path, queryString] = raw.split('?');
+    const params = {};
+    if (queryString) {
+        queryString.split('&').forEach(pair => {
+            const [key, value] = pair.split('=');
+            if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || '');
+        });
+    }
+    bus.emit('route:change', path);
+    if (routes[path]) {
+        routes[path](params);
     }
 }
 

@@ -1,5 +1,5 @@
 // ============================================
-// KSIA Smart Airport – Sidebar Component
+// PER Smart Airport – Sidebar Component
 // ============================================
 import { el, $, $$, icons, bus } from '../utils/helpers.js';
 

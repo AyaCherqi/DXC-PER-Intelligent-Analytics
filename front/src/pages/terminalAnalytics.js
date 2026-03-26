@@ -18,7 +18,10 @@ const terminals = [
 let activeTerminal = 't1-international';
 let chartInstances = [];
 
-export function initTerminalAnalytics(container) {
+export function initTerminalAnalytics(container, terminalId) {
+    if (terminalId && terminals.find(t => t.id === terminalId)) {
+        activeTerminal = terminalId;
+    }
     container.innerHTML = '';
     container.classList.add('full-page');
 

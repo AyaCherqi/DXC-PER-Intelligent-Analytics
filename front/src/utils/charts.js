@@ -1,5 +1,5 @@
 // ============================================
-// KSIA Smart Airport – Chart.js Helpers
+// PER Smart Airport – Chart.js Helpers
 // ============================================
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
@@ -57,10 +57,10 @@ export function createSparkline(canvas, data, color = '#38bdf8', showYAxis = fal
         options: baseOptions({
             scales: showYAxis ? {
                 x: { display: false },
-                y: { 
-                    display: true, 
-                    grid: { color: gridColor, drawBorder: false }, 
-                    ticks: { color: tickColor, font: { family: fontFamily, size: 8 }, maxTicksLimit: 3 } 
+                y: {
+                    display: true,
+                    grid: { color: gridColor, drawBorder: false },
+                    ticks: { color: tickColor, font: { family: fontFamily, size: 8 }, maxTicksLimit: 3 }
                 }
             } : defaultScales
         })
