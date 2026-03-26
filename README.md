@@ -6,11 +6,11 @@ An AI-powered digital twin and smart analytics platform designed for Perth Airpo
 
 - **Interactive 3D Digital Twin**: A complete 3D representation of the airport geometry (Terminals T1-T4, runways, aprons) built with Three.js.
 - **Real-Time & Predictive Analytics**: KPI tracking and forecasting across five core domains:
-  - 👥 Passenger Flow & Queue Management
-  - 🛫 Resource Scheduling & Gate Assignment
-  - 🛡️ Threat Detection & Abandoned Baggage
-  - ⚡ Sustainability & Energy Optimization
-  - 🛍️ Customer Experience & Retail
+  -  Passenger Flow & Queue Management
+  -  Resource Scheduling & Gate Assignment
+  -  Threat Detection & Abandoned Baggage
+  -  Sustainability & Energy Optimization
+  -  Customer Experience & Retail
 - **Smart Alerts & Actions**: AI-driven insights (e.g., CrowdSense, ThreatGuard, EnergyOptimize) that generate actionable recommendations based on SLA thresholds and simulated real-time data.
 - **Terminal Analytics Dashboard**: In-depth analytical views for each terminal, providing both operational (current) and predictive (+30m, +60m) metrics.
 - **Executive View**: High-level summaries including health scores, risk indices, and revenue performance.
