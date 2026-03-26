@@ -1,0 +1,161 @@
+/* ============================================
+   KSIA Smart Airport – Layout
+   ============================================ */
+
+#app {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+/* === Sidebar === */
+#sidebar {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--gradient-sidebar);
+    border-right: 1px solid var(--border-secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--sp-3) 0;
+    z-index: var(--z-base);
+    transition: width var(--transition-base);
+    position: relative;
+}
+
+/* === Main Wrapper === */
+#main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* === Top Bar === */
+#topbar {
+    height: var(--topbar-height);
+    min-height: var(--topbar-height);
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-secondary);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--sp-5);
+    gap: var(--sp-4);
+    z-index: var(--z-base);
+}
+
+/* === Content Area === */
+#content-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* === Viewport (Center) === */
+#viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-primary);
+    min-width: 0;
+}
+
+#viewport canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* === Right Panel === */
+#right-panel {
+    width: var(--right-panel-width);
+    min-width: var(--right-panel-width);
+    height: 100%;
+    background: var(--bg-secondary);
+    border-left: 1px solid var(--border-secondary);
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: var(--z-base);
+}
+
+/* === Timeline === */
+#timeline {
+    height: var(--timeline-height);
+    min-height: var(--timeline-height);
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-secondary);
+    display: flex;
+    align-items: center;
+    padding: 0 var(--sp-5);
+    gap: var(--sp-4);
+}
+
+/* === Full-page mode (Alert Center) === */
+#viewport.full-page {
+    background: var(--bg-primary);
+    overflow-y: auto;
+    padding: var(--sp-6);
+}
+
+#right-panel.hidden {
+    display: none;
+}
+
+#timeline.hidden {
+    display: none;
+}
+
+/* ============================================
+   Responsive – Tablet
+   ============================================ */
+@media (max-width: 1280px) {
+    :root {
+        --right-panel-width: 320px;
+    }
+}
+
+@media (max-width: 1024px) {
+    #sidebar {
+        width: 56px;
+        min-width: 56px;
+    }
+
+    #right-panel {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        z-index: var(--z-dropdown);
+        box-shadow: var(--shadow-lg);
+        transform: translateX(100%);
+        transition: transform var(--transition-base);
+    }
+
+    #right-panel.open {
+        transform: translateX(0);
+    }
+
+    :root {
+        --right-panel-width: 340px;
+    }
+}
+
+@media (max-width: 768px) {
+    #topbar {
+        padding: 0 var(--sp-3);
+    }
+
+    #timeline {
+        padding: 0 var(--sp-3);
+        height: 44px;
+        min-height: 44px;
+    }
+}

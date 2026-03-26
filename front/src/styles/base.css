@@ -1,0 +1,271 @@
+/* ============================================
+   KSIA Smart Airport – Base Styles
+   ============================================ */
+@import './variables.css';
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-primary);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-cyan);
+}
+
+/* Selection */
+::selection {
+    background: var(--accent-cyan);
+    color: var(--bg-primary);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 4px var(--accent-cyan-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 16px var(--accent-cyan-glow);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+
+    25%,
+    75% {
+        opacity: 0.3;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes alertPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 var(--accent-red-glow);
+    }
+
+    50% {
+        box-shadow: 0 0 0 8px transparent;
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+.text-cyan {
+    color: var(--accent-cyan);
+}
+
+.text-green {
+    color: var(--accent-green-bright);
+}
+
+.text-amber {
+    color: var(--accent-amber);
+}
+
+.text-red {
+    color: var(--accent-red);
+}
+
+.text-purple {
+    color: var(--accent-purple);
+}
+
+.text-muted {
+    color: var(--text-secondary);
+}
+
+.bg-glow-cyan {
+    background: var(--accent-cyan-glow);
+}
+
+.bg-glow-green {
+    background: var(--accent-green-glow);
+}
+
+.bg-glow-red {
+    background: var(--accent-red-glow);
+}
+
+.animate-fade-in {
+    animation: fadeIn var(--transition-base) forwards;
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp var(--transition-base) forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulseGlow 2s infinite;
+}
+
+.animate-blink {
+    animation: blink 1.5s infinite;
+}
+
+.truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
