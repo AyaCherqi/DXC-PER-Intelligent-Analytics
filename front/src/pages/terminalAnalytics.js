@@ -1,5 +1,5 @@
 // ============================================
-// Perth Airport – Terminal Analytics Page
+// Montreal Airport – Terminal Analytics Page
 // Full KPI Coverage: All 36 KPIs × 5 Domains × 5 Terminals
 // ============================================
 import { el, $, icons, bus } from '../utils/helpers.js';

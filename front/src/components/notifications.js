@@ -1,5 +1,5 @@
 // ============================================
-// PER Smart Airport – Notifications Panel
+// YUL Smart Airport – Notifications Panel
 // ============================================
 import { el, $, icons, bus, formatTime, getSeverityBadgeClass, getAlertStatusLabel } from '../utils/helpers.js';
 import { alerts } from '../data/mockData.js';

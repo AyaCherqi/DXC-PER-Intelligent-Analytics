@@ -1,5 +1,5 @@
 // ============================================
-// Perth Airport – Passenger & Vehicle Flow
+// Montreal Airport – Passenger & Vehicle Flow
 // Particle paths aligned with corrected layout
 // ============================================
 import * as THREE from 'three';

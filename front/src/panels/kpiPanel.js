@@ -1,5 +1,5 @@
 // ============================================
-// PER Smart Airport – KPI Panel (Right Side)
+// YUL Smart Airport – KPI Panel (Right Side)
 // ============================================
 import { el, $, bus, icons } from '../utils/helpers.js';
 import { initPassengerFlow } from './passengerFlow.js';

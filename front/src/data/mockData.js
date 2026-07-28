@@ -1,5 +1,5 @@
 // ============================================
-// Perth Airport – Mock Data
+// Montreal Airport – Mock Data
 // ============================================
 
 export const alerts = [
@@ -27,14 +27,14 @@ export const alerts = [
   {
     id: 'ALT-004', timestamp: '2026-03-25T08:20:00Z', source: 'EnergyOptimize AI',
     zone: 'T1 International', severity: 'medium', category: 'Energy Risk',
-    description: 'Predicted energy peak: 08:55 AWST. Forecast demand: 8.1 MW (90% of 9.0 MW contractual limit — Red threshold). Perth summer mode active (39°C today). HVAC at 53% of total draw. Synergy TOU peak period starts 14:00.',
+    description: 'Predicted energy peak: 08:55 EST. Forecast demand: 8.1 MW (90% of 9.0 MW contractual limit — Red threshold). Montreal summer mode active (39°C today). HVAC at 53% of total draw. Synergy TOU peak period starts 14:00.',
     action: 'Initiate T1 HVAC pre-cooling NOW (20-min lead time per cartography). Pre-start standby generator. Shift non-critical loads away from 14:00–20:00 Synergy TOU window.',
     status: 'new'
   },
   {
     id: 'ALT-005', timestamp: '2026-03-25T08:15:00Z', source: 'RetailPulse AI',
     zone: 'T1 Duty Free (International)', severity: 'low', category: 'Retail Demand Surge',
-    description: 'AFL game day at Optus Stadium (Perth Scorchers vs Melbourne). Retail footfall forecast: +22% above baseline (AFL multiplier 1.22×). T1 Duty Free current conversion: 9.2% (above 8% benchmark). School holiday WA Period 1 ends this week.',
+    description: 'AFL game day at Optus Stadium (Montreal Scorchers vs Melbourne). Retail footfall forecast: +22% above baseline (AFL multiplier 1.22×). T1 Duty Free current conversion: 9.2% (above 8% benchmark). School holiday WA Period 1 ends this week.',
     action: 'Increase T1 Duty Free staffing +30% for 09:00–12:00. Pre-load AFL content on digital signage (AANA compliant). Activate dynamic ad scheduling for Melbourne-origin passengers.',
     status: 'resolved'
   },
@@ -55,7 +55,7 @@ export const alerts = [
   {
     id: 'ALT-008', timestamp: '2026-03-25T07:58:00Z', source: 'ThreatGuard AI',
     zone: 'T2 FIFO Terminal', severity: 'high', category: 'Security',
-    description: 'Suspicious behaviour: individual loitering 12 min at T2 FIFO gate area (>10 min threshold). Trajectory anomaly score: 0.87 (threshold: >0.85 per cartography). Body pose/trajectory only — no facial recognition (Australian Privacy Act 1988 / OAIC compliant).',
+    description: 'Suspicious behaviour: individual loitering 12 min at T2 FIFO gate area (>10 min threshold). Trajectory anomaly score: 0.87 (threshold: >0.85 per cartography). Body pose/trajectory only — no facial recognition (Canadian Privacy Act / PIPEDA / OAIC compliant).',
     action: 'SOC operator review required before action. Deploy AFP patrol to T2 FIFO gate. Log in Security Incident DB. False alarm rate this shift: 7 (within <15/shift target).',
     status: 'acknowledged'
   },
@@ -84,21 +84,21 @@ export const alerts = [
     id: 'ALT-012', timestamp: '2026-03-25T07:28:00Z', source: 'RetailPulse AI',
     zone: 'Qantas Club Lounge', severity: 'low', category: 'Retail Demand Surge',
     description: 'Qantas Club occupancy: 93% (298/320 capacity). Booking queue: 14 QFF Gold/Platinum members. Qantas Business Lounge at 62% — suitable overflow capacity available. FIFO workers with Qantas FF status contributing to Mon/Tue AM spike.',
-    action: 'Redirect Qantas FF Gold overflow to Business Lounge (available capacity: 68 seats). Notify lounge staff. Update Perth Airport app lounge status widget.',
+    action: 'Redirect Qantas FF Gold overflow to Business Lounge (available capacity: 68 seats). Notify lounge staff. Update Montreal Airport app lounge status widget.',
     status: 'resolved'
   },
   {
     id: 'ALT-013', timestamp: '2026-03-25T07:20:00Z', source: 'ThreatGuard AI',
     zone: 'Cargo & Freight', severity: 'high', category: 'Security',
-    description: 'X-ray anomaly: cargo container CG-2241 flagged, confidence 92%. Object classification: dense metallic cluster (non-standard). ABF (Australian Border Force) notification sent. Aviation Transport Security Regulations 2005 — secondary inspection mandatory.',
+    description: 'X-ray anomaly: cargo container CG-2241 flagged, confidence 92%. Object classification: dense metallic cluster (non-standard). CBSA (Canada Border Services Agency) notification sent. Canadian Aviation Security Regulations — secondary inspection mandatory.',
     action: 'Route CG-2241 to secondary inspection bay immediately. ABF officer on-site ETA 4 min. Full video clip logged (30 sec before detection). ASIC-zone access log reviewed.',
     status: 'in_progress'
   },
   {
     id: 'ALT-014', timestamp: '2026-03-25T07:12:00Z', source: 'SystemWatch AI',
     zone: 'T2 Regional', severity: 'critical', category: 'System Anomaly',
-    description: 'FIDS (Flight Information Display System) outage — T2 departure hall. 14 screens offline. Affects FIFO charter departures (4 flights, ~380 mining workers). Perth Airport app push notifications activated as fallback. IT recovery team ETA 9 min.',
-    action: 'Deploy backup display system. Dispatch IT recovery crew to T2. Activate Perth Airport app push notifications for affected flights. Ground staff with handheld boards to T2 gates.',
+    description: 'FIDS (Flight Information Display System) outage — T2 departure hall. 14 screens offline. Affects FIFO charter departures (4 flights, ~380 mining workers). Montreal Airport app push notifications activated as fallback. IT recovery team ETA 9 min.',
+    action: 'Deploy backup display system. Dispatch IT recovery crew to T2. Activate Montreal Airport app push notifications for affected flights. Ground staff with handheld boards to T2 gates.',
     status: 'in_progress'
   },
   {
@@ -121,11 +121,11 @@ export const smartActions = [
   },
   {
     id: 'SA-002',
-    title: 'Initiate T1 HVAC pre-cooling — Perth summer 39°C, peak in 18 min',
+    title: 'Initiate T1 HVAC pre-cooling — Montreal summer 39°C, peak in 18 min',
     description: 'EnergyOptimize AI predicts 8.1 MW demand at 08:55 (90% of 9.0 MW contractual limit — Red threshold). Pre-cooling must start 20 min before peak (cartography). Net solar offset: 0.8 MW. HVAC currently 53% of load (below 55% cap). Synergy TOU tariff peak starts 14:00 — load shift opportunity.',
     priority: 88, impact: 'Strategic', confidence: 93,
     linkedAlerts: ['ALT-004'], zones: ['T1 International', 'T1 Gates 50–56'],
-    benefit: 'Avoids contractual demand charge overrun | saves est. AUD 8.4K (Synergy TOU tariff) | 0.69 kgCO2/kWh grid factor offset', status: 'pending'
+    benefit: 'Avoids contractual demand charge overrun | saves est. CAD 8.4K (Synergy TOU tariff) | 0.69 kgCO2/kWh grid factor offset', status: 'pending'
   },
   {
     id: 'SA-003',
@@ -133,7 +133,7 @@ export const smartActions = [
     description: 'GateOps AI gate reassignment score: 74/100 for Gate 52 (TOPSIS optimisation). Wide-body buffer: +10 min vs narrow-body applied to QF9 (B787). Gate 52 available from 10:30, minimum 20-min gap maintained. Swissport ground handler notified. Walking distance delta for pax: +3 min (within MCT).',
     priority: 86, impact: 'Financial', confidence: 95,
     linkedAlerts: ['ALT-003'], zones: ['T1 Gate 54', 'T1 Gate 52'],
-    benefit: 'Prevents 35-min cascading delay | ~AUD 31K cost avoidance | protects 2 downstream QF rotations', status: 'pending'
+    benefit: 'Prevents 35-min cascading delay | ~CAD 31K cost avoidance | protects 2 downstream QF rotations', status: 'pending'
   },
   {
     id: 'SA-004',
@@ -194,7 +194,7 @@ export const kpiData = {
   // Thresholds per cartography:
   //   staff efficiency: ≥85% green | 70–85% amber | <70% red
   //   on-time boarding: ≥92% green | 85–92% amber | <85% red (within 5 min of schedule)
-  //   on-time departure: ≥88% target (Perth Airport Master Plan 2030+) — IATA 15 min standard
+  //   on-time departure: ≥88% target (Montreal Airport Master Plan 2030+) — IATA 15 min standard
   //   turnaround MAE target: <5 min
   //   FIFO charter tolerance: +10 min boarding SLA, faster turnaround profile
   //   Wide-body buffer: +10 min vs narrow-body
@@ -205,15 +205,15 @@ export const kpiData = {
     staffEfficiencyTarget: 85,       // cartography target
     onTimeBoardingRate: 89,          // % — AMBER (85–92%), within 5 min of scheduled boarding
     onTimeBoardingTarget: 92,        // cartography target
-    onTimeDepartureRate: 86,         // % — AMBER (below 88% Perth Master Plan target)
-    onTimeDepartureTarget: 88,       // Perth Airport Master Plan 2030+ target
+    onTimeDepartureRate: 86,         // % — AMBER (below 88% Montreal Master Plan target)
+    onTimeDepartureTarget: 88,       // Montreal Airport Master Plan 2030+ target
     turnaroundForecast: 42,          // min — wide-body (A330 to Singapore) with +10 min buffer
     turnaroundUnit: 'min',
     turnaroundMAE: 4.2,              // min — within target <5 min
     gateReassignmentScore: 74,       // /100 — AMBER (>70 triggers warning per cartography)
     delayPropagation: 18,            // min — above alert threshold (>500 pax-delay-minutes)
     delayPropagationPaxMinutes: 720, // pax × delay-min — approaching critical (>2000 = critical)
-    groundHandlers: ['Swissport', 'dnata', 'Menzies'], // Perth Airport active handlers
+    groundHandlers: ['Swissport', 'dnata', 'Menzies'], // Montreal Airport active handlers
     sparklineData: [84, 86, 88, 85, 89, 87, 86, 90, 88, 87, 89, 86]
   },
 
@@ -226,7 +226,7 @@ export const kpiData = {
   //   False alarm target: <10/shift (security), <20/shift (forgotten items)
   //   Suspicious behavior loitering >10 min, anomaly score >0.85
   //   Intrusion response SLA: <3 min acknowledge, <10 min resolve
-  //   Privacy: Australian Privacy Act 1988 — NO facial recognition
+  //   Privacy: Canadian Privacy Act / PIPEDA — NO facial recognition
   //   Compliance: Aviation Transport Security Act 2004
   // ─────────────────────────────────────────────────────────────
   baggageThreat: {
@@ -241,18 +241,18 @@ export const kpiData = {
     resolutionSLA: { sterile: 5, public: 8, intrusion: 10, suspicious: 20 }, // cartography SLAs
     abandonedBagCount: 3,            // active detections — 2 'forgotten', 1 under security review
     afpNotifications: 1,             // mandatory for sterile zone detections
-    privacyFramework: 'Australian Privacy Act 1988 — no facial recognition / biometric storage',
+    privacyFramework: 'Canadian Privacy Act / PIPEDA — no facial recognition / biometric storage',
     complianceAct: 'Aviation Transport Security Act 2004',
     sparklineData: [2.2, 1.8, 2.4, 1.6, 2.0, 1.8, 2.2, 1.8, 1.6, 2.0, 1.9, 1.8]
   },
 
   // ─────────────────────────────────────────────────────────────
   // 4. SUSTAINABILITY & ENERGY OPTIMIZATION
-  // Perth-specific per cartography:
+  // Montreal-specific per cartography:
   //   WA SWIS grid emission factor: ~0.69 kgCO2/kWh (update annually)
   //   Net Zero 2050 target, interim -46% by 2030 (Paris alignment)
   //   Contractual demand limit — Amber >80%, Red >90%, Critical >95%
-  //   HVAC max 55% of terminal consumption (Perth summer 35–42°C)
+  //   HVAC max 55% of terminal consumption (Montreal summer 35–42°C)
   //   Summer mode (Nov–Mar): +25% above mild-season baseline is normal
   //   Peak demand hours: 13:00–17:00 (high solar + high cooling load)
   //   Synergy TOU tariff: shift loads away from 14:00–20:00 workdays
@@ -268,7 +268,7 @@ export const kpiData = {
     carbonTarget2050: 'Net Zero 2050',
     gridEmissionFactor: 0.69,        // kgCO2/kWh — WA SWIS (update annually per NGER)
     energyPerTerminal: {
-      'T1 Intl': 3.1,               // MW — summer HVAC load (Perth max 42°C)
+      'T1 Intl': 3.1,               // MW — summer HVAC load (Montreal max 42°C)
       'T2 FIFO': 0.6,               // MW — FIFO night ops, reduced HVAC zones
       'T3 Qantas': 1.8,             // MW
       'T4 Qantas': 1.2,             // MW
@@ -295,7 +295,7 @@ export const kpiData = {
 
   // ─────────────────────────────────────────────────────────────
   // 5. CUSTOMER EXPERIENCE & RETAIL
-  // Perth-specific per cartography:
+  // Montreal-specific per cartography:
   //   Chatbot P90 <2 sec, P99 <5 sec | Languages: EN, 普通话, 日本語, Bahasa, हिन्दी, 한국어
   //   Resolution rate target: ≥85% | Amber 75–85% | Red <75%
   //   Retail conversion target: ≥8% (airport retail benchmark)
@@ -306,7 +306,7 @@ export const kpiData = {
   //   AFL matches (Optus Stadium): +15–25% pax on game days
   //   School holidays: +30–40% leisure traffic
   //   Christmas/Easter: +50–60% peak (planning T-60 days)
-  //   Privacy: Australian Privacy Act 1988 — explicit opt-in for analytics
+  //   Privacy: Canadian Privacy Act / PIPEDA — explicit opt-in for analytics
   //   Ad CTR target: >1.5% interactive, >0.5% passive+QR | Revenue model: CPM + CPC
   // ─────────────────────────────────────────────────────────────
   customerExperience: {
@@ -338,26 +338,26 @@ export const kpiData = {
     conversionProbability: 32,      // % — above >5% top-ranked recommendation target
     revenueUplift: 16.4,           // % — above ≥15% target (A/B p<0.05)
     revenueUpliftTarget: 15,        // cartography target
-    privacyCompliance: 'Australian Privacy Act 1988 — explicit opt-in, no PII in ad targeting',
+    privacyCompliance: 'Canadian Privacy Act / PIPEDA — explicit opt-in, no PII in ad targeting',
     sparklineData: [62, 66, 64, 70, 68, 74, 71, 78, 75, 79, 76, 78]
   },
 
   // ─────────────────────────────────────────────────────────────
   // EXECUTIVE VIEW
-  // Perth context: ~15M pax/year, 4th busiest in Australia
+  // Montreal context: ~15M pax/year, 3rd busiest in Canada
   // Master Plan 2030+: new terminal, 3rd runway, $5B investment
   // ─────────────────────────────────────────────────────────────
   executive: {
     healthScore: 81,
     riskIndex: 34,
-    revenuePerformance: '+8.2% AUD',  // AUD, GST-exclusive per cartography
+    revenuePerformance: '+8.2% CAD',  // CAD, GST-exclusive per cartography
     sustainabilityScore: 74,           // Net Zero 2050 progress tracker
     carbonProgress2030: 28,            // % toward -46% by 2030 target
     activeAlerts: { critical: 2, high: 4, medium: 3, low: 2 },
     predictedStressIndex: 64,          // AFL season + FIFO peak combination
     decisionLog: [
       { time: '08:42', decision: 'Activated FIFO surge plan — T2 early-morning 1.8× multiplier applied', by: 'Ops Director' },
-      { time: '07:55', decision: 'Pre-cooling T1 International initiated — predicted peak 08:20 (Perth summer 39°C)', by: 'Facilities Manager' },
+      { time: '07:55', decision: 'Pre-cooling T1 International initiated — predicted peak 08:20 (Montreal summer 39°C)', by: 'Facilities Manager' },
       { time: '07:12', decision: 'Gate reassignment approved — SQ226 moved to Gate 52 (18-min overlap resolved)', by: 'APOC Duty Manager' },
       { time: '06:30', decision: 'AFP notified — sterile zone detection T1 restricted area (Protocol Amber)', by: 'SOC Supervisor' },
     ]
@@ -403,7 +403,7 @@ export const zones = [
   // ── Lounges ──
   { id: 'qantas-club',      name: 'Qantas Club Lounge', type: 'zone', status: 'warning', throughput: '320 guests' },
   { id: 'qantas-business',  name: 'Qantas Business Lounge', type: 'zone', status: 'operational', throughput: '180 guests' },
-  { id: 'virgin-lounge',    name: 'Virgin Australia Lounge', type: 'zone', status: 'operational', throughput: '280 guests' },
+  { id: 'virgin-lounge',    name: 'Air Canada Maple Leaf Lounge', type: 'zone', status: 'operational', throughput: '280 guests' },
   { id: 'aspire-lounge',    name: 'Plaza Premium Lounge', type: 'zone', status: 'operational', throughput: '220 guests' },
   { id: 'alliance-lounge',  name: 'Alliance Lounge (T2)', type: 'zone', status: 'operational', throughput: '140 guests' },
 
@@ -454,7 +454,7 @@ export const zoneKpis = {
     energy: { consumption: '3.1 MW', peak: '3.4 MW', efficiency: 82, trend: [2.6, 2.8, 2.9, 3.0, 3.1, 3.2, 3.1] },
     satisfaction: { score: 86, avgWait: '7.2 min (AMBER >5 min SLA)', complaints: 8 },
     security: { threatLevel: 'Elevated', incidents: 1, cameras: 186, uptime: 99.7 },
-    revenue: { daily: 'AUD 1.08M', retail: 'AUD 340K', fAndB: 'AUD 190K', dutyfree: 'AUD 550K' },
+    revenue: { daily: 'CAD 1.08M', retail: 'CAD 340K', fAndB: 'CAD 190K', dutyfree: 'CAD 550K' },
     flights: { departures: 44, arrivals: 40, delayed: 6, onTime: 88 },
     activeAlerts: 4,
     trend: [52, 56, 60, 64, 68, 68, 68]
@@ -464,7 +464,7 @@ export const zoneKpis = {
     energy: { consumption: '1.6 MW', peak: '2.0 MW', efficiency: 88, trend: [1.4, 1.5, 1.6, 1.7, 1.6, 1.7, 1.6] },
     satisfaction: { score: 91, avgWait: '4.2 min (GREEN <5 min)', complaints: 2 },
     security: { threatLevel: 'Low', incidents: 0, cameras: 124, uptime: 99.8 },
-    revenue: { daily: 'AUD 520K', retail: 'AUD 160K', fAndB: 'AUD 130K', dutyfree: 'AUD 230K' },
+    revenue: { daily: 'CAD 520K', retail: 'CAD 160K', fAndB: 'CAD 130K', dutyfree: 'CAD 230K' },
     flights: { departures: 38, arrivals: 36, delayed: 3, onTime: 92 },
     activeAlerts: 1,
     trend: [40, 44, 46, 50, 52, 52, 52]
@@ -483,7 +483,7 @@ export const zoneKpis = {
     energy: { consumption: '1.8 MW', peak: '2.2 MW', efficiency: 86, trend: [1.4, 1.5, 1.7, 1.8, 1.8, 2.0, 1.8] },
     satisfaction: { score: 89, avgWait: '4.8 min (GREEN <5 min)', complaints: 3 },
     security: { threatLevel: 'Low', incidents: 0, cameras: 112, uptime: 99.8 },
-    revenue: { daily: 'AUD 680K', retail: 'AUD 200K', fAndB: 'AUD 155K', dutyfree: 'AUD 325K' },
+    revenue: { daily: 'CAD 680K', retail: 'CAD 200K', fAndB: 'CAD 155K', dutyfree: 'CAD 325K' },
     flights: { departures: 34, arrivals: 32, delayed: 4, onTime: 88 },
     activeAlerts: 2,
     trend: [44, 48, 52, 56, 58, 58, 56]

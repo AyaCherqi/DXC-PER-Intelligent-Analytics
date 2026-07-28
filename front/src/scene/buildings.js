@@ -1,5 +1,5 @@
 // ============================================
-// Perth Airport – 3D Scene
+// Montreal Airport – 3D Scene
 // Accurate layout based on PER official maps
 //
 // COORDINATE SYSTEM: 1 unit ≈ 40m real world
@@ -210,7 +210,7 @@ export function createBuildings(scene) {
         color: 0x6a3070,
         emissiveColor: 0xa78bfa,
         emissiveIntensity: 0.2,
-        label: 'Virgin Australia Lounge',
+        label: 'Air Canada Maple Leaf Lounge',
     });
     zoneObjects['aspire-lounge'] = createBox(scene, {
         id: 'aspire-lounge',

@@ -1,5 +1,5 @@
 // ============================================
-// PER Smart Airport – 3D Airport Scene
+// YUL Smart Airport – 3D Airport Scene
 // ============================================
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';

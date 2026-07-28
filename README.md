@@ -1,6 +1,6 @@
-# Perth Airport (PER) Intelligent Analytics Digital Twin
+# Montreal Airport (PER) Intelligent Analytics Digital Twin
 
-An AI-powered digital twin and smart analytics platform designed for Perth Airport. This application provides real-time monitoring, predictive analytics, and strategic intelligence across all operational domains of the airport through a combination of a 3D visualization dashboard and detailed KPI panels.
+An AI-powered digital twin and smart analytics platform designed for Montreal Airport. This application provides real-time monitoring, predictive analytics, and strategic intelligence across all operational domains of the airport through a combination of a 3D visualization dashboard and detailed KPI panels.
 
 ## Features
 
@@ -86,4 +86,4 @@ npm run preview
 
 - **Modularity**: The application avoids large framework overhead by using a robust Vanilla JS architecture with an event-driven `bus` (`src/utils/helpers.js`).
 - **Styling**: Uses a curated CSS variable design system (`src/styles/base.css`) ensuring high-performance dark-mode aesthetics without external CSS frameworks.
-- **Data Source**: Currently uses a highly detailed mock data layer (`src/data/mockData.js` and `terminalKpiData.js`) simulating Perth-specific operating conditions (e.g., FIFO peaks, WA SWIS grid factors, AFL game days).
+- **Data Source**: Currently uses a highly detailed mock data layer (`src/data/mockData.js` and `terminalKpiData.js`) simulating Montreal-specific operating conditions (e.g., FIFO peaks, WA SWIS grid factors, AFL game days).

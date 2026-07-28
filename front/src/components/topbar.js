@@ -1,5 +1,5 @@
 // ============================================
-// Perth Airport – Top Bar Component
+// Montreal Airport – Top Bar Component
 // ============================================
 import { el, $, icons, bus } from '../utils/helpers.js';
 

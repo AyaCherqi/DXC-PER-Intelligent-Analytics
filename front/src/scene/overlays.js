@@ -1,5 +1,5 @@
 // ============================================
-// Perth Airport – 3D Overlays
+// Montreal Airport – 3D Overlays
 // Heatmap zones + 3D labels — aligned with
 // corrected buildings.js positions
 // ============================================

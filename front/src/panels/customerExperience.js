@@ -1,6 +1,6 @@
 // ============================================
 // Customer Experience & Retail Module
-// Perth Airport context
+// Montreal Airport context
 // ============================================
 import { el, bus } from '../utils/helpers.js';
 import { createSparkline } from '../utils/charts.js';

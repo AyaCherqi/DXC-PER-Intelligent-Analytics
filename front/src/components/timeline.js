@@ -1,5 +1,5 @@
 // ============================================
-// PER Smart Airport – Timeline Component
+// YUL Smart Airport – Timeline Component
 // ============================================
 import { el, $, icons, bus } from '../utils/helpers.js';
 import { timelineData } from '../data/mockData.js';

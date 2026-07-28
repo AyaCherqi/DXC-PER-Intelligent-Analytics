@@ -1,5 +1,5 @@
 // ============================================
-// PER Smart Airport – Sidebar Component
+// YUL Smart Airport – Sidebar Component
 // ============================================
 import { el, $, $$, icons, bus } from '../utils/helpers.js';
 
@@ -16,9 +16,9 @@ export function initSidebar() {
     // Logo
     const logo = el('div', { className: 'sidebar-logo' }, [
         el('img', {
-            src: '/assets/per-logo.png',
-            alt: 'Perth Airport',
-            style: { width: '38px', height: '38px', objectFit: 'contain', borderRadius: '50%' }
+            src: '/assets/adm-logo.png',
+            alt: 'ADM - Aéroports de Montréal',
+            style: { width: '52px', height: 'auto', objectFit: 'contain' }
         }),
     ]);
     sidebar.appendChild(logo);

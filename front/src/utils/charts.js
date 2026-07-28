@@ -1,5 +1,5 @@
 // ============================================
-// PER Smart Airport – Chart.js Helpers
+// YUL Smart Airport – Chart.js Helpers
 // ============================================
 import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
